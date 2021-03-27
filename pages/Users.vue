@@ -7,16 +7,20 @@
 
 <script>
 export default {
-    name: "Users",
-    data() {
-      return {
-        users: []
-      }
-    },
-    async asyncData({ $axios }) {
-      const users = await $axios.$get('/users')
-      return { users }
+  name: "Users",
+  data() {
+    return {
+      users: []
     }
+  },
+  methods: {
+      async loadUsers () {
+        this.users = await this.$axios.$get('/users')
+      }
+  },
+  async mounted() {
+    await this.loadUsers()
+  }
 }
 </script>
 
